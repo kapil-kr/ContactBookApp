@@ -35,6 +35,7 @@ kotlin {
                 implementation(kotlin("stdlib-common"))
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:$serializationVersion")
                 implementation("io.ktor:ktor-client-core:$ktorVersion")
+                implementation( "org.litote.kmongo:kmongo-id:4.1.3")
             }
         }
 
@@ -51,6 +52,8 @@ kotlin {
                 implementation(kotlin("test-junit5"))
                 implementation("io.rest-assured:rest-assured:3.3.0")
                 implementation("org.assertj:assertj-core:3.16.1")
+                runtimeOnly("org.junit.jupiter:junit-jupiter-engine:5.3.1")
+                implementation("io.ktor:ktor-jackson:$ktorVersion")
             }
         }
         val jsTest by getting {
@@ -108,6 +111,12 @@ tasks {
         kotlinOptions {
             jvmTarget = "1.8"
         }
+    }
+}
+
+tasks {
+    withType<Test> {
+        useJUnitPlatform()
     }
 }
 
